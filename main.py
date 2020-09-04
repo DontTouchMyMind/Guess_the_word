@@ -1,21 +1,6 @@
 import random
 
 
-def get_random_word_test():
-    print(game.get_random_word())
-    print(game.get_random_word())
-    print(game.get_random_word())
-
-
-def guess_letter_test():
-    print('The test of the method guess_letter begin...')
-    test_letter = game.get_random_word()[0]
-    game.guess_letter(test_letter)
-    print('#Test 1 was successful.' if game.allowed_attempts == difficult_game else '#Test 1 failed.')
-    game.guess_letter('')
-    print('#Test 2 was successful.' if game.allowed_attempts == difficult_game - 1 else '#Test 2 failed.')
-
-
 class Game:
 
     def __init__(self, allowed_attempts: int):
@@ -24,6 +9,10 @@ class Game:
         self.__player_word = []
 
     def get_random_word(self):
+        """
+        The method reads data-file and returns hidden random word from data-file.
+        :return: type:list; random word.
+        """
         with open('data/WordsStockRus.txt', 'r', encoding='utf8') as file:
             line = file.readlines()
         self.__game_word = list(line[random.randint(0, 11650)].strip())
@@ -33,7 +22,7 @@ class Game:
         """
         The method gets a letter and checks for its presence in the hidden word.
         If player make mistake, then the number of allowed attempts will decrease.
-        :param letter: type:str; Player letter.
+        :param letter: type:str; player letter.
         """
         self.__player_word.append(letter)
         if letter not in self.__game_word:
@@ -47,7 +36,3 @@ class Game:
 difficult_game = int(input('Enter the number of available attempts: '))
 
 game = Game(difficult_game)
-
-if __name__ == '__main__':
-    get_random_word_test()
-    guess_letter_test()
