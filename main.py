@@ -61,7 +61,10 @@ while game.allowed_attempts != 0:
     if game.get_visible_word() == game.game_word:
         print('Congratulations! You are winner!')
         break
+    print(f'You should guess this word {game.get_visible_word()}.')
+    print(f'You have remaining {game.allowed_attempts} attempts. ')
     game.guess_letter(input('Enter you letter: '))
 else:
     print('Sorry! You lose! You have no attempts left.')
+    print(f'The hidden word is {game.game_word}')
 print('Goodbye! See you soon!')
